@@ -109,7 +109,7 @@ catche=`lscpu | grep 'L3 cache' | cut -f 2 -d ":" | awk '{$1=$1}1'`
 python=`python3 --version | sed 's/[^0-9.]*//g'`
 gcc=`g++ -dumpversion`
 g=`g++ -dumpversion`
-firefox=`firefox --version | sed 's/[^0-9.]*//g'`
+#firefox=`firefox --version | sed 's/[^0-9.]*//g'`
 os=`lsb_release -d | awk '{print $2 $3 $4}'`
 kernel=`uname -r`
 #printf "$kernel\n"
