@@ -1,0 +1,168 @@
+#!/bin/bash
+
+
+
+##############################################################
+############## rong ebong tader color code ###################
+normal='\033[0m'
+red='\033[0;31m'
+green='\033[0;32m'
+orange='\033[0;33m'
+blue='\033[0;34m'
+purple='\033[0;35m'
+cyan='\033[0;36m'
+gray='\033[0;37m'
+yellow='\033[1;33m'
+white='\033[1;37m'
+
+reset=$(tput sgr 0)
+black_f=$(tput setaf 16)
+red_f=$(tput setaf 1)
+green_f=$(tput setaf 2)
+yellow_f=$(tput setaf 3)
+green_f=$(tput setaf 82)
+white_f=$(tput setaf 15)
+#mgnt_f=$(tput setaf 15)
+
+black_b=$(tput setab 16)
+red_b=$(tput setab 1)
+blue_b=$(tput setab 18)
+yellow_b=$(tput setab 3)
+green_b=$(tput setab 82)
+white_b=$(tput setab 15)
+mgnt_b=$(tput setab 150)
+
+bold=$(tput bold)
+normal=$(tput sgr0)
+#############################################################
+#echo "${white_b}Red text ${red_f}and white background${rst}█"
+aa=${white_b}${black_f}
+bb=${reset}
+cc=${green_b}${black_f}
+#############################################################
+loading () 
+{
+	i=$1
+	for (( k=1; k<=$1; k++ ))
+	do
+		for (( c=1; c<=80; c++ ))
+		do  
+	   		printf "|"; sleep 0.0001;
+		done 
+		printf "\r";
+		
+	 	for (( c=1; c<=80; c++ ))
+		do  
+	   		printf "/"; sleep 0.0001;
+		done
+		printf "\r";
+		for (( c=1; c<=80; c++ ))
+		do  
+	   		printf "-"; sleep 0.0001;
+		done 
+		printf "\r";
+		for (( c=1; c<=80; c++ ))
+		do  
+	   		printf "\\"; sleep 0.0001;
+		done 
+	  	printf "\r";
+		#i=$(( $i + 1 ))
+	done
+	
+	printf "\r\r"; 
+	
+}
+######################## intro ##############################
+name=`whoami`
+printf "\t\t\t${red_b}${blue_b}${bold} A BRIEF INFO of ${red_b}${bold}$name${blue_b}'s PC ${reset}" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
+
+printf "\n"
+time=$(LANG=en_us_88591; date | awk '{print $4}')
+date=$(LANG=en_us_88591; date | awk '{print $3}')
+month=$(LANG=en_us_88591; date | awk '{print $2}')
+bar=$(LANG=en_us_88591; date | awk '{print $1}')
+year=$(LANG=en_us_88591; date | awk '{print $6}')
+btry=`upower -i $(upower -e | grep '/battery') | grep --color=never -E percentage|xargs|cut -d' ' -f2|sed s/%//`
+
+
+
+printf "TIME : $aa$time$bb\t"
+printf "DAY : $aa$bar $date$bb\t"
+printf "M&Y : $aa$month $year$bb\t"
+printf "BATTERY : $aa$btry%%$bb"
+printf "\n\n"
+#############################################################
+
+
+
+ram=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+ramGb=$(expr $ram / 1000000)
+freeram=$(grep MemAvailable /proc/meminfo | awk '{print $2}')
+freeram=$(expr $freeram / 1000)
+
+cpu=`grep -c 'model name' /proc/cpuinfo`
+processor=`lscpu | sed -nr ':a;s/  / /;ta; /Model name/ s/.*: (.*) @ .*/\1/p'`
+mhz=`lscpu | grep 'CPU max MHz' | cut -f 2 -d ":" | awk '{$1=$1}1'`
+archi=`lscpu | grep 'Architecture' | cut -f 2 -d ":" | awk '{$1=$1}1'`
+catche=`lscpu | grep 'L3 cache' | cut -f 2 -d ":" | awk '{$1=$1}1'`
+
+python=`python3 --version | sed 's/[^0-9.]*//g'`
+gcc=`g++ -dumpversion`
+g=`g++ -dumpversion`
+firefox=`firefox --version | sed 's/[^0-9.]*//g'`
+os=`lsb_release -d | awk '{print $2 $3 $4}'`
+kernel=`uname -r`
+#printf "$kernel\n"
+
+printf "$cc RAM : $bb\t$ramGb GB\t\t\t\t";						printf "$cc CORES : $bb $cpu\n";
+printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc PROC. : $bb $processor\n";
+printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc SPEED : $bb $mhz MHz\n";
+printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc ARCHI : $bb $archi\n";
+printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc CATCHE: $bb $catche\n";
+
+#echo "${cc}this is ${bold}bold${normal} but this isn't"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+
