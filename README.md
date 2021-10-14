@@ -5,7 +5,7 @@ A simple package that shows brief details of the system.
 
 ### Installation Guide
 
-You may download the repo or clone the git in your pc. To clone it, open your terminal, use the command written below -
+This package can be installed in any linux based distro. You may download the repo or clone the git in your pc. To clone it, open your terminal, use the command written below -
 <pre>
 git clone http://www.github.com/hurutta/mekur
 </pre>
