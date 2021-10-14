@@ -18,6 +18,4 @@ To install, use this command -
 make in
 </pre>
 You will be needed super-user privilege to make installation. You may enable it by -
-<pre><tt>
-sudo su
-</tt></pre>
+<tt>sudo su</tt>
