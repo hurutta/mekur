@@ -74,16 +74,36 @@ loading ()
 }
 ######################## intro ##############################
 name=`whoami`
-printf "\t\t\t${red_b}${blue_b}${bold} A BRIEF INFO of ${red_b}${bold}$name${blue_b}'s PC ${reset}" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
+#printf "\t\t\t${red_b}${blue_b}${bold} A BRIEF INFO of ${red_b}${bold}$name${blue_b}'s PC ${reset}" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
 
-printf "\n"
+echo "\n\n"
+
+for (( i=0;i<=5;i++))
+	do
+	echo -en "\033[1A"
+	echo -en "                                                            \n";                                                                         
+	sleep 0.10s;
+	
+	
+	echo -en "\033[1A"
+	
+	printf "\t\t\t${red_b}${blue_b}${bold} A BRIEF INFO of ${red_b}${bold}$name${blue_b}'s PC ${reset}" | sed  -e :a -e "s/^.\{1,$(tput cols)\}$/ & /;ta" | tr -d '\n' | head -c $(tput cols)
+	echo -en "\n"
+	sleep 0.10s;
+done
+
+
+
+
+#############################################
+#printf "\n"
 time=$(LANG=en_us_88591; date | awk '{print $4}')
 date=$(LANG=en_us_88591; date | awk '{print $3}')
 month=$(LANG=en_us_88591; date | awk '{print $2}')
 bar=$(LANG=en_us_88591; date | awk '{print $1}')
 year=$(LANG=en_us_88591; date | awk '{print $6}')
 btry=`upower -i $(upower -e | grep '/battery') | grep --color=never -E percentage|xargs|cut -d' ' -f2|sed s/%//`
-
+uptime=`uptime | awk -F'( |,|:)+' '{print $6,$7",",$8,"hours,",$9,"minutes"}'`
 
 
 printf "TIME : $aa$time$bb\t"
@@ -112,13 +132,20 @@ g=`g++ -dumpversion`
 #firefox=`firefox --version | sed 's/[^0-9.]*//g'`
 os=`lsb_release -d | awk '{print $2 $3 $4}'`
 kernel=`uname -r`
-#printf "$kernel\n"
+dvcName=`cat /sys/devices/virtual/dmi/id/product_name`
+bios=`cat /sys/devices/virtual/dmi/id/bios_version`
+env=`echo $XDG_CURRENT_DESKTOP`
+wifi=`iwgetid -r`
+display=`xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/'`
 
-printf "$cc RAM : $bb\t$ramGb GB\t\t\t\t";						printf "$cc CORES : $bb $cpu\n";
-printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc PROC. : $bb $processor\n";
-printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc SPEED : $bb $mhz MHz\n";
-printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc ARCHI : $bb $archi\n";
-printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc CATCHE: $bb $catche\n";
+printf "$cc DEVICE: $bb $dvcName\t\t";						printf "$cc WIFI  : $bb $wifi\n";
+printf "$cc KERNEL: $bb $kernel \t\t";						printf "$cc CORES : $bb $cpu\n";
+printf "$cc OS    : $bb $os \t\t";							printf "$cc PROC. : $bb $processor\n";
+printf "$cc RAM   : $bb $ramGb GB\t\t\t\t";					printf "$cc SPEED : $bb $mhz MHz\n";
+printf "$cc FREE  : $bb $freeram MB\t\t\t";					printf "$cc ARCHI : $bb $archi\n";
+printf "$cc PYTHON: $bb $python \t\t\t";					printf "$cc CATCHE: $bb $catche\n";
+printf "$cc BIOS  : $bb $bios \t\t";						printf "$cc ENVMNT: $bb $env\n";
+printf "$cc DSPLAY: $bb $display \t\t\t";						printf "$cc UPTIME: $bb $uptime\n";
 
 #echo "${cc}this is ${bold}bold${normal} but this isn't"
 
@@ -159,10 +186,4 @@ printf "$cc FREE: $bb\t$freeram MB\t\t\t\t";					printf "$cc CATCHE: $bb $catche
 
 
 
-
-
-
-
-
 #printf "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
-
