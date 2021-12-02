@@ -140,10 +140,10 @@ sig=$(iwconfig 2>/dev/null | grep -n 'Quality' | cut -f 2 -d "=" | awk '{print $
 display=`xdpyinfo 2>/dev/null | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/'`
 birth=`ls -lact --full-time /etc | tail -1 | awk '{print $6,$7}'`
 
-printf "$cc DEVICE: $bb $dvcName\t\t";						printf "$cc WIFI  : $bb $wifi\n";
-printf "$cc KERNEL: $bb $kernel \t\t";						printf "$cc QUALTY: $bb $sig\n";
-printf "$cc OS    : $bb $os \t\t";							printf "$cc CORES : $bb $cpu\n";
-printf "$cc RAM   : $bb $ramGb GB\t\t\t\t";					printf "$cc PROC. : $bb $processor\n";
+printf '%-67.80s' "$cc DEVICE: $bb $dvcName";						printf "$cc WIFI  : $bb $wifi\n";
+printf '%-67.80s' "$cc KERNEL: $bb $kernel";						printf "$cc QUALTY: $bb $sig\n";
+printf '%-67.80s' "$cc OS    : $bb $os";							printf "$cc CORES : $bb $cpu\n";
+printf '%-67.80s' "$cc RAM   : $bb $ramGb GB";					printf "$cc PROC. : $bb $processor\n";
 printf "$cc FREE  : $bb $freeram MB\t\t\t";					printf "$cc SPEED : $bb $mhz MHz\n";
 printf "$cc PYTHON: $bb $python \t\t\t";					printf "$cc ARCHI : $bb $archi\n";
 printf "$cc BIOS  : $bb $bios \t\t";						printf "$cc CATCHE: $bb $catche\n";
