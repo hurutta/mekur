@@ -130,14 +130,14 @@ python=`python3 --version | sed 's/[^0-9.]*//g'`
 gcc=`g++ -dumpversion`
 g=`g++ -dumpversion`
 #firefox=`firefox --version | sed 's/[^0-9.]*//g'`
-os=`lsb_release -d | awk '{print $2 $3 $4}'`
+os=`lsb_release -d 2>/dev/null | awk '{print $2 $3 $4}'`
 kernel=`uname -r`
 dvcName=`cat /sys/devices/virtual/dmi/id/product_name`
 bios=`cat /sys/devices/virtual/dmi/id/bios_version`
 env=`echo $XDG_CURRENT_DESKTOP`
 wifi=`iwgetid -r`
 sig=$(iwconfig 2>/dev/null | grep -n 'Quality' | cut -f 2 -d "=" | awk '{print $1}') 
-display=`xdpyinfo | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/'`
+display=`xdpyinfo 2>/dev/null | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/'`
 birth=`ls -lact --full-time /etc | tail -1 | awk '{print $6,$7}'`
 
 printf "$cc DEVICE: $bb $dvcName\t\t";						printf "$cc WIFI  : $bb $wifi\n";
